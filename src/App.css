@@ -1,3 +1,49 @@
-.App {
-  text-align: center;
+/*----NavBar----*/
+.NavBar a {
+  position: relative;
+  font-size: 15px;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 40px;
+}
+.NavBar a::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.NavBar a:hover::before {
+  width: 100%;
+}
+/*----HomePage----*/
+.container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: bisque;
+}
+.Recipe {
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: bisque;
+}
+.food {
+  border: black solid 2px;
+  width: 350px;
+  height: 270px;
+  margin: 10px;
 }
