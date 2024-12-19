@@ -108,7 +108,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="image">Profile Image URL</label>
+                  <label htmlFor="image">Profile Image URL (Optional)</label>
                   <Field
                     type="text"
                     name="image"

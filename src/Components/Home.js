@@ -26,14 +26,14 @@ const Home = () => {
   });
 
   // Sort recipes alphabetically by name
-  const sortedRecipes = data?.slice().sort((a, b) => 
-    a.name.localeCompare(b.name)
-  );
+  const sortedRecipes = data
+    ?.slice()
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   // Sort categories alphabetically by name
-  const sortedCategories = categoriesData?.slice().sort((a, b) => 
-    a.name.localeCompare(b.name)
-  );
+  const sortedCategories = categoriesData
+    ?.slice()
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="page-container">
@@ -50,9 +50,9 @@ const Home = () => {
           <h2>Popular Categories</h2>
           <div className="category-container">
             {sortedCategories?.map((category, index) => (
-              <Link 
-                to={`/category/${category.name}`} 
-                key={index} 
+              <Link
+                to={`/category/${category.name}`}
+                key={index}
                 className="category-box"
               >
                 <h3>{category.name}</h3>
