@@ -1,11 +1,19 @@
-import "./App.css";
-import Nav from "./Components/Nav";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Components/Home";
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
+import CategoryPage from "./Components/CategoryPage";
 
 function App() {
   return (
-    <div className="logo">
-      <h1>Hello</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/category/:categoryName" element={<CategoryPage />} />
+      </Routes>
+    </Router>
   );
 }
 

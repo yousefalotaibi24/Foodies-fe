@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <NavLink to="/">Recipe Hub</NavLink>
+        <NavLink to="/">Foodiez</NavLink>
       </div>
       <div className="nav-links">
         <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>

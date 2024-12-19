@@ -1,12 +1,11 @@
 import React from "react";
 import Nav from "./Nav";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
 
 const Home = () => {
-  const categories = ["American", "Italian", "Indian", "Chinese", "Kuwaiti"];
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["recipes"],
     queryFn: async () => {
@@ -22,13 +21,19 @@ const Home = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:8000/api/categories");
-
-      console.log(response, "ddd");
       return response.data;
     },
   });
 
-  console.log("categories", categoriesData);
+  // Sort recipes alphabetically by name
+  const sortedRecipes = data?.slice().sort((a, b) => 
+    a.name.localeCompare(b.name)
+  );
+
+  // Sort categories alphabetically by name
+  const sortedCategories = categoriesData?.slice().sort((a, b) => 
+    a.name.localeCompare(b.name)
+  );
 
   return (
     <div className="page-container">
@@ -37,7 +42,6 @@ const Home = () => {
         <div className="hero-content">
           <h1>Discover Delicious Recipes</h1>
           <p>Find and share the best recipes from around the world</p>
-          <button className="cta-button">Explore Recipes</button>
         </div>
       </div>
 
@@ -45,11 +49,15 @@ const Home = () => {
         <section className="categories-section">
           <h2>Popular Categories</h2>
           <div className="category-container">
-            {categoriesData?.map((category, index) => (
-              <div key={index} className="category-box">
-                <div className="category-img"></div>
+            {sortedCategories?.map((category, index) => (
+              <Link 
+                to={`/category/${category.name}`} 
+                key={index} 
+                className="category-box"
+              >
                 <h3>{category.name}</h3>
-              </div>
+                <div className="category-decoration"></div>
+              </Link>
             ))}
           </div>
         </section>
@@ -64,7 +72,7 @@ const Home = () => {
                 Error loading recipes: {error.message}
               </div>
             ) : (
-              data?.map((recipe) => (
+              sortedRecipes?.map((recipe) => (
                 <div key={recipe.id} className="recipe-box">
                   <div
                     className="recipe-img"
@@ -77,11 +85,6 @@ const Home = () => {
                   <div className="recipe-info">
                     <h3>{recipe.name}</h3>
                     <p>{recipe.description}</p>
-                    <div className="recipe-meta">
-                      <span>⭐ {recipe.rating}</span>
-                      <span>🕒 {recipe.cookTime} min</span>
-                      <span>👨‍🍳 {recipe.difficulty}</span>
-                    </div>
                   </div>
                 </div>
               ))
